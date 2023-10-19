@@ -1,0 +1,21 @@
+# server dependencies
+Flask
+
+# ml dependecies
+ipykernel
+pandas
+numpy
+seaborn
+scikit-learn
+xgboost
+
+# data dependencies
+joblib
+pickles
+
+yfinance
+pandas-datareader
+
+
+
+
