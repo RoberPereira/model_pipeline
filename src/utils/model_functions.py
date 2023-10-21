@@ -54,7 +54,7 @@ def compute_prediction_intervals(pred, target, confidence_level=0.95, se=None):
                       .rename(columns={pred.name: f'{pred.name}_low_b'}),
                       pd.DataFrame(upper_bound)
                       .rename(columns={pred.name: f'{pred.name}_upp_b'})],
-                      axis=1)
+                     axis=1)
 
 
 def interpolate_prediction_days(y_pred_day, dt_forecast_idx,

@@ -1,4 +1,4 @@
-from . import config
+from etl import config
 import pandas as pd
 
 
