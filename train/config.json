@@ -1,4 +1,15 @@
 {
     "version": "01",
-    "etl_version": "01"
+    "etl_version": "01",
+    "model":{
+        "type": "xgb",
+        "parameters":{},
+        "identifier": "meli_one"
+    },
+    "train":{
+        "hyperparameter_tuning": true,
+        "train_test": true,
+        "forecast_days": 23,
+        "exclude_first_days": 23
+    }
 }
