@@ -58,13 +58,14 @@ def stock_update():
 
 
 def generate_forecast_chart():
-    ds_forecast_result = pd.read_pickle('data/processed/xgb_meli_ds_forecast_2023-10-15.pkl')
+    ds_forecast_result = pd.read_pickle('''data/processed/
+                                        xgb_meli_ds_forecast_2023-10-15.pkl''')
 
     df_update = stock_update()
     df_update = pd.concat([df_update, ds_forecast_result[['forecast', 
                                                           'forecast_upp_b',
                                                           'forecast_low_b']]],
-                                                          axis=1)
+                          axis=1)
 
     fig, axs = plt.subplots(1, figsize=(15, 5))
     df_update['2023-01-05':][['open', 'forecast']].plot(ax=axs)
