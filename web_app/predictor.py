@@ -1,13 +1,14 @@
 import pickle
 import joblib
 
-import matplotlib.pyplot as plt
+import sys
 import io
 import base64
 
 from pandas_datareader import data as pdr
 import yfinance as yf
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -31,18 +32,18 @@ def load_artifacts():
 
     global __forecast
     if __forecast is None:
-        __forecast = joblib.load("data/processed/X_forecast")
+        __forecast = joblib.load("data/v0.0.1/processed/X_forecast")
 
     print('Artifacts loaded successfully')
 
 
 def load_model():
     print('Loading model...')
-
+    print(sys.path)
     global __model
     if __model is None:
         __model = pickle.load(
-            open("models/xgb_pipeline_MELI_10-15.dat", "rb"))
+            open("models/v0.0.1/xgb_pipeline_MELI_10-15.dat", "rb"))
 
     print('Model loaded successfully')
 
@@ -58,8 +59,7 @@ def stock_update():
 
 
 def generate_forecast_chart():
-    ds_forecast_result = pd.read_pickle('''data/processed/
-                                        xgb_meli_ds_forecast_2023-10-15.pkl''')
+    ds_forecast_result = pd.read_pickle('data/v0.0.1/processed/xgb_meli_ds_forecast_2023-10-15.pkl')
 
     df_update = stock_update()
     df_update = pd.concat([df_update, ds_forecast_result[['forecast', 

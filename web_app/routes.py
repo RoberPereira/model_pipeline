@@ -1,9 +1,9 @@
 from flask import render_template, Blueprint, jsonify
-from app import predictor
+from . import predictor
 
 
 # Create a Blueprint for routes
-app = Blueprint('app', __name__)
+app = Blueprint('web_app', __name__)
 
 
 @app.route('/')
