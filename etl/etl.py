@@ -1,5 +1,5 @@
 from src.services.loaderclass import StockLoader
-from ..src.services.featureclass import FeatureEngineering
+from src.services.featureclass import FeatureEngineering
 from . import config
 import datetime as dt
 import joblib

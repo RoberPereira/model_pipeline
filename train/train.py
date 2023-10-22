@@ -1,10 +1,11 @@
 from src.services import transformerclass
 from src.utils.model_functions import compute_evaluation_metrics
-from . import data_splitter
+from src.services import splitterclass
 from . import (config, etl_metadata, etl_metadata_serialized)
 
 import numpy as np
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 import pickle
 import joblib
@@ -23,17 +24,13 @@ class Train():
         target = etl_metadata.target
         features = etl_metadata.features
 
-        splitter = data_splitter.DataSplitter(ds_data)
+        splitter = splitterclass.DataSplitter(ds_data)
         ds_train, ds_test = splitter.split_train_test(ds_data)
-
+        
         X_train = ds_train[features]
         X_test = ds_test[features]
         y_train = ds_train[target]
         y_test = ds_test[target]
-
-        transformer = transformerclass.Transformer(etl_metadata.features)
-        X_train = transformer.scale_data(X_train)
-        X_test = transformer.scale_data(X_test)
 
         X_train_c = np.concatenate((X_train, X_test), axis=0)
         y_train_c = np.concatenate((y_train, y_test), axis=0)
@@ -85,5 +82,6 @@ class Train():
             random_state=42)
 
         return Pipeline([
+            ('scaler', StandardScaler()),
             ('model', model)
         ])

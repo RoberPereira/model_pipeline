@@ -1,4 +1,4 @@
-from . import config
+from train import config
 import pandas as pd
 
 
@@ -14,6 +14,18 @@ class DataSplitter():
          self.__test_idx,
          self.__eval_idx,
          self.__forecast_idx) = self.__compute_training_idx(ds)
+
+    def get_train_idx(self):
+        return self.__train_idx
+
+    def get_test_idx(self):
+        return self.__test_idx
+
+    def get_eval_idx(self):
+        return self.__eval_idx
+
+    def get_forecast_idx(self):
+        return self.__forecast_idx
 
     def split_train_test(self, ds_data: pd.DataFrame):
 

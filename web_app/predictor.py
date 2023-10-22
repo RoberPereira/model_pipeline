@@ -35,17 +35,11 @@ def forecast():
 
 def get_forecast(ds_forecast):
 
+    features = train_metadata.etl_metadata.features
     fe = FeatureEngineering()
     ds_forecast = fe.compute_lag_features(ds_forecast)
 
-    joblib.dump(ds_forecast, 'ds_forecast')
-
-    features = train_metadata.etl_metadata.features
-    transformer = Transformer(features)
-    X_forecast = transformer.scale_data(ds_forecast)
-    joblib.dump(X_forecast, 'X_forecast')
-
-    return __model.predict(X_forecast)
+    return __model.predict(ds_forecast[features])
 
 
 def load_model():
@@ -76,7 +70,7 @@ def generate_forecast_chart():
     # xgb_meli_ds_forecast_2023-10-15.pkl')
     startdate = dt.datetime(2023, 1, 1)
     enddate = dt.datetime(2023, 12, 1)
-    forecast_dt = dt.datetime(2023, 10, 10)
+    forecast_dt = dt.datetime(2023, 10, 11)
 
     ds_stock = load_stock('MELI', startdate, enddate)
 
@@ -104,7 +98,7 @@ def generate_forecast_chart():
     fig, axs = plt.subplots(1, figsize=(15, 5))
     df_update['2023-01-05':][['open', 'forecast']].plot(ax=axs)
 
-    # Save the chart as an image (e.g., PNG)
+    # Save the chart as animage (e.g., PNG)
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
