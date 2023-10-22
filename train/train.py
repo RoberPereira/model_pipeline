@@ -1,15 +1,18 @@
-from src.services import transformerclass
 from src.utils.model_functions import compute_evaluation_metrics
 from src.services import splitterclass
 from . import (config, etl_metadata, etl_metadata_serialized)
 
-import numpy as np
+import pandas as pd
 from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 import pickle
 import joblib
 import json
+
+import warnings
+warnings.filterwarnings("ignore", "is_categorical_dtype")
 
 
 class Train():
@@ -20,20 +23,18 @@ class Train():
     def run(self):
         print('Start training...')
 
-        ds_data = joblib.load(f'data/processed/{etl_metadata.output_processed}')
-        target = etl_metadata.target
-        features = etl_metadata.features
+        ds_data = joblib.load('data/processed/'
+                              + f'{etl_metadata.output_processed}')
 
         splitter = splitterclass.DataSplitter(ds_data)
         ds_train, ds_test = splitter.split_train_test(ds_data)
-        
-        X_train = ds_train[features]
-        X_test = ds_test[features]
+
+        target = etl_metadata.target
         y_train = ds_train[target]
         y_test = ds_test[target]
 
-        X_train_c = np.concatenate((X_train, X_test), axis=0)
-        y_train_c = np.concatenate((y_train, y_test), axis=0)
+        X_train_c = pd.concat([ds_train, ds_test], axis=0)
+        y_train_c = pd.concat((y_train, y_test), axis=0)
 
         print('Training model...')
         pipeline = self.get_model()
@@ -72,6 +73,7 @@ class Train():
 
     def get_model(self):
 
+        features = etl_metadata.features
         model = xgb.XGBRegressor(
             n_estimators=27,
             max_depth=4,
@@ -82,6 +84,8 @@ class Train():
             random_state=42)
 
         return Pipeline([
+            ("selector", ColumnTransformer([("selector", "passthrough",
+                                             features)], remainder="drop")),
             ('scaler', StandardScaler()),
             ('model', model)
         ])

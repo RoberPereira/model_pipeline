@@ -7,8 +7,14 @@ app = Blueprint('web_app', __name__)
 
 
 @app.route('/')
-def index():
+def home():
     return "Welcome to the Home Page"
+
+
+@app.route('/index')
+def index():
+    chart_image = predictor.generate_forecast_chart()
+    return render_template('index.html', chart_image=chart_image)
 
 
 @app.route('/ping')
