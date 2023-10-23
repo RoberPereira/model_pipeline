@@ -1,15 +1,26 @@
 {
     "version": "01",
     "etl_version": "01",
-    "model":{
-        "type": "xgb",
-        "parameters":{},
-        "identifier": "meli_one"
-    },
+    "features": {
+        "on_columns": [
+            "open",
+            "high",
+            "low",
+            "close",
+            "adj close",
+            "volume"
+        ],
+        "day_windows": [1, 5, 10, 23]
+    },    
     "train":{
         "hyperparameter_tuning": true,
         "train_test": true,
         "forecast_days": 23,
         "exclude_first_days": 23
-    }
+    },
+    "model":{
+        "type": "xgb",
+        "parameters":{},
+        "identifier": "meli_one"
+    }    
 }

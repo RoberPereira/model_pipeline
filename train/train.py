@@ -1,5 +1,6 @@
 from src.utils.model_functions import compute_evaluation_metrics
-from src.services import splitterclass
+from src.services.splitterclass import DataSplitter
+from src.services.aggregatorclass import FeatureAggregator
 from . import (config, etl_metadata, etl_metadata_serialized)
 
 import pandas as pd
@@ -26,7 +27,7 @@ class Train():
         ds_data = joblib.load('data/processed/'
                               + f'{etl_metadata.output_processed}')
 
-        splitter = splitterclass.DataSplitter(ds_data)
+        splitter = DataSplitter(ds_data)
         ds_train, ds_test = splitter.split_train_test(ds_data)
 
         target = etl_metadata.target
@@ -48,17 +49,20 @@ class Train():
                                                    y_pred, model_name)
 
         print('Saving metadata...')
-        self.__save_metadata(model_name, model_metrics.to_json())
+        model_features = pipeline['aggregator'].agg_features_
+        self.__save_metadata(model_name, model_metrics.to_json(),
+                             model_features)
 
         print('Training model DONE SUCCESSFULLY')
 
-    def __save_metadata(self, model_name, model_metrics):
+    def __save_metadata(self, model_name, model_metrics, model_features):
         self.metadata = {
             'etl_version': config.etl_version,
             'train_version': config.version,
             'output_model': model_name,
             'metrics': model_metrics,
-            'etl_metadata': etl_metadata_serialized
+            'etl_metadata': etl_metadata_serialized,
+            'features': model_features
         }
         with open(f'train/metadata/metadata_v{config.version}.json', "w") as f:
             json.dump(self.metadata, f)
@@ -72,8 +76,6 @@ class Train():
         return name
 
     def get_model(self):
-
-        features = etl_metadata.features
         model = xgb.XGBRegressor(
             n_estimators=27,
             max_depth=4,
@@ -83,9 +85,16 @@ class Train():
             objective='reg:squarederror',
             random_state=42)
 
+        on_columns = config.features.on_columns
+        windows = config.features.day_windows
+
+        ct = ColumnTransformer([("selector", "passthrough", on_columns)],
+                               verbose_feature_names_out=False,
+                               remainder="drop").set_output(transform='pandas')
+
         return Pipeline([
-            ("selector", ColumnTransformer([("selector", "passthrough",
-                                             features)], remainder="drop")),
+            ("selector", ct),
+            ('aggregator', FeatureAggregator(on_columns, windows)),
             ('scaler', StandardScaler()),
             ('model', model)
         ])

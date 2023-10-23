@@ -57,7 +57,7 @@ def compute_prediction_intervals(pred, target, confidence_level=0.95, se=None):
                      axis=1)
 
 
-def interpolate_prediction_days(y_pred_day, dt_forecast_idx,
+def interpolate_prediction_days(y_pred_day: np.array, dt_forecast_idx,
                                 targets_day_periods, forecast_col='forecast'):
     """
     Interpolate missing days of predictions

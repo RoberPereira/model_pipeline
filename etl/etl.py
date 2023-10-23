@@ -1,5 +1,5 @@
 from src.services.loaderclass import StockLoader
-from src.services.featureclass import FeatureEngineering
+from src.services.targetdefinerclass import TargetDefiner
 from . import config
 import datetime as dt
 import joblib
@@ -30,10 +30,9 @@ class Etl():
                                     self.startdate, self.enddate,
                                     'raw')
 
-        print('Computing target and features')
-        fe = FeatureEngineering()
-        ds_stock_data = fe.compute_target_feature(ds_stock_data)
-        ds_stock_data = fe.compute_lag_features(ds_stock_data)
+        print('Computing target')
+        fe = TargetDefiner()
+        ds_stock_data = fe.compute_target(ds_stock_data)
 
         print('Saving processed data...')
         processed_file = self.__save_data(ds_stock_data, self.stock,
@@ -53,8 +52,7 @@ class Etl():
             'endddate': self.enddate.strftime("%Y:%m:%d"),
             'output_raw': raw_file,
             'output_processed': precessed_file,
-            'target': fe.get_target_columns(),
-            'features': fe.get_features_columns()
+            'target': fe.get_target_columns()
         }
         with open(f'etl/metadata/metadata_v{self.version}.json', "w") as file:
             json.dump(self.metadata, file)
