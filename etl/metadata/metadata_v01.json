@@ -1,0 +1,14 @@
+{
+    "etl_version": "01",
+    "stock": "MELI",
+    "startdate": "1990:01:01",
+    "endddate": "2023:10:11",
+    "output_raw": "MELI_1990:01:01_2023:10:11_v01",
+    "output_processed": "MELI_1990:01:01_2023:10:11_v01",
+    "target": [
+        "target_1d",
+        "target_5d",
+        "target_10d",
+        "target_23d"
+    ]
+}

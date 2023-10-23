@@ -1,0 +1,14 @@
+{
+    "version": "01",
+    "fetch_data": {
+        "stock": "MELI",
+        "startdate": "1990-01-01",
+        "enddate": "2023-10-11"
+    },
+    "target": {
+        "on_column": "open",
+        "prefix": "target_",
+        "postfix": "d",
+        "forecast_days": [1, 5, 10, 23]
+    }
+}

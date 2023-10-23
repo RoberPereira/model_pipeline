@@ -1,14 +1,20 @@
 from flask import render_template, Blueprint, jsonify
-from app import predictor
+from . import predictor
 
 
 # Create a Blueprint for routes
-app = Blueprint('app', __name__)
+app = Blueprint('web_app', __name__)
 
 
 @app.route('/')
-def index():
+def home():
     return "Welcome to the Home Page"
+
+
+@app.route('/index')
+def index():
+    chart_image = predictor.generate_forecast_chart()
+    return render_template('index.html', chart_image=chart_image)
 
 
 @app.route('/ping')

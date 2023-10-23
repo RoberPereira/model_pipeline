@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Web App</title>
+    <style>
+        /* Basic styling for the layout */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+        .filters {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-right: 1px solid #ccc;
+        }
+        .charts {
+            flex: 1;
+            padding: 10px;
+        }
+
+        /* Style for filters */
+        .filter-section {
+            margin-bottom: 10px;
+        }
+        .filter-label {
+            font-weight: bold;
+        }
+        .filter-input {
+            width: 100%;
+        }
+
+        /* Style for the chart area */
+        .chart {
+            width: 100%;
+            height: 300px; /* Set an appropriate height */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="filters">
+            <div class="filter-section">
+                <label class="filter-label">Start Date:</label>
+                <input type="date" class="filter-input">
+            </div>
+            <div class="filter-section">
+                <label class="filter-label">End Date:</label>
+                <input type="date" class="filter-input">
+            </div>
+            <div class="filter-section">
+                <label class="filter-label">Stock Options:</label>
+                <select class="filter-input">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+        </div>
+        <div class="charts">
+            <!-- You can generate and display your Matplotlib charts here -->
+            <div class="chart" id="chart1">
+                <h1>MELI Forecast</h1>
+                <img src="data:image/png;base64,{{ chart_image }}" alt="Chart">
+            </div>
+            <div class="chart" id="chart2"></div>
+            <!-- Add more chart placeholders as needed -->
+        </div>
+    </div>
+</body>
+</html>
