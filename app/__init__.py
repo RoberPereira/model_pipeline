@@ -2,7 +2,7 @@ from src.utils.util import DotDict
 from flask import Flask
 import json
 
-with open('web_app/config.json', 'r') as f:
+with open('app/config.json', 'r') as f:
     config = DotDict(**json.load(f))
 
 train_version = config.train_version

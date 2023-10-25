@@ -1,4 +1,4 @@
-from web_app import build_app
+from app import build_app
 # from etl import etl
 # from train import train
 

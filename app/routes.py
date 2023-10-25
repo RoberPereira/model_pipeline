@@ -3,7 +3,7 @@ from . import predictor
 
 
 # Create a Blueprint for routes
-app = Blueprint('web_app', __name__)
+app = Blueprint('app', __name__)
 
 
 @app.route('/')
@@ -15,6 +15,13 @@ def home():
 def index():
     chart_image = predictor.generate_forecast_chart()
     return render_template('index.html', chart_image=chart_image)
+
+
+@app.route('/bootstrap')
+def bootstrap():
+    # chart_image = predictor.generate_forecast_chart()
+    return render_template('bootstrap.html')
+    # return render_template('index.html', chart_image=chart_image)    
 
 
 @app.route('/ping')
