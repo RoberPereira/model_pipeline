@@ -1,0 +1,63 @@
+{   
+    "version": "01",
+    "steps": [
+        {
+            "type": "etl",
+            "version": "01",
+            "steps":[
+                {
+                    "method": "fetch_data",
+                    "params":{
+                        "stock": "MELI",
+                        "startdate": "1990-01-01",
+                        "enddate": "2023-10-11"
+                    }
+                },
+                {
+                    "method": "compute_target",
+                    "params":{
+                        "on_column": "open",
+                        "prefix": "t_",
+                        "postfix": "d",
+                        "forecast_day": [1, 5, 10, 23]
+                    }
+                }  
+            ]
+        },
+        {
+            "type": "train",
+            "version": "01",
+            "steps":[
+                {
+                    "method": "load_data",
+                    "params": { "etl_version": "01" }
+                },
+                {
+                    "method": "compute_features",
+                    "params":{
+                        "on_columns": ["open", "high", "low", "close", "adj close", "volume" ],
+                        "day_windows": [1, 5, 10, 23]
+                    }
+                },
+                {
+                    "method": "get_model",
+                    "params":{
+                        "model":{
+                            "type": "xgb",
+                            "params":{},
+                            "identifier": "meli_one"
+                        }
+                    }
+                },
+                {
+                    "method": "train",
+                    "params": {
+                        "hyperparameter_tuning": true,
+                        "train_test": true,
+                        "forecast_day": 23
+                    }
+                }
+            ]
+        }
+    ]
+}
