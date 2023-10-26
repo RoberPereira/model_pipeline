@@ -1,6 +1,6 @@
-from src.classes.pipelineclass import PipelineStep
-from etl.etl import Etl
-from train.train import Train
+from components._pipecomponents import (
+    PipelineComponent,
+    Etl)
 import logging
 import logging.config
 import json
@@ -10,11 +10,11 @@ logging.config.fileConfig('../.logging.conf')
 logger = logging.getLogger('Logger')
 
 
-def get_step_class(params) -> PipelineStep:
+def get_component(params) -> PipelineComponent:
     if (params.get('type') == 'etl'):
         return Etl(params)
-    elif (params.get('type') == 'train'):
-        return Train(params)
+    # elif (params.get('type') == 'train'):
+    #    return Train(params)
 
 
 if __name__ == '__main__':
@@ -24,17 +24,8 @@ if __name__ == '__main__':
 
     for pipe_step in config.get('steps'):
 
-        logger.info(pipe_step.get('type'))
-        pipe_class = get_step_class(pipe_step)
-
-        for class_step in pipe_step.get('steps'):
-
-            class_method = getattr(pipe_class, class_step.get('method'))
-            result = class_method(class_step.get('params'))
-
-            print(result)
-
-        
+        logger.info(f'Start pipeline step : {pipe_step.get("type")}')
+        get_component(pipe_step).run()
 
     #logger.debug('debug message')
     #logger.info('info message')

@@ -6,13 +6,17 @@
             "version": "01",
             "steps":[
                 {
-                    "method": "fetch_data",
+                    "method": "extract",
                     "params":{
                         "stock": "MELI",
                         "startdate": "1990-01-01",
                         "enddate": "2023-10-11"
                     }
                 },
+                {
+                    "method": "transform",
+                    "params":{}
+                },                
                 {
                     "method": "compute_target",
                     "params":{
@@ -21,7 +25,11 @@
                         "postfix": "d",
                         "forecast_day": [1, 5, 10, 23]
                     }
-                }  
+                },
+                {
+                    "method": "load",
+                    "params":{ "path_name": null }
+                }                  
             ]
         },
         {

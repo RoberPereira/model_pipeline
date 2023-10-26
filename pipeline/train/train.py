@@ -20,26 +20,6 @@ class Train():
     def __init__(self, config) -> None:
         self.config = config
 
-    def load_data(self, params):
-
-        print(f'Fetching {params.get("stock")} stock data')
-        pass
-
-    def compute_features(self, params):
-
-        print(f'compute_features ')
-        pass
-
-    def get_model(self, params):
-
-        print(f'get_model')
-        pass
-
-    def train(self, params):
-
-        print(f'train on columns ')
-        pass
-
     def run(self, parmas):
         print('Start training...')
 
