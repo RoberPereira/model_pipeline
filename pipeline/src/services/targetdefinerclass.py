@@ -23,6 +23,6 @@ class TargetDefiner():
     def get_target_columns(self):
         prefix = self.config.get('prefix')
         postfix = self.config.get('postfix')
-        targets_forecast_days = self.config.get('forecast_days')
+        targets_forecast_days = self.config.get('forecast_day')
 
         return [f'{prefix}{t}{postfix}' for t in targets_forecast_days]

@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-class DataSplitter():
+class DataSplitterCustom():
 
     def __init__(self, config, ds: pd.DataFrame) -> None:
         self.config = config
@@ -40,7 +40,7 @@ class DataSplitter():
 
     def __compute_training_idx(self, ds_data: pd.DataFrame):
         # 23 days Periods ( Aprox 1 month,  Buisiness Days only)
-        day_periods = self.config.train.forecast_days
+        day_periods = self.config.get('forecast_day')
 
         # 1 Month for evaluation
         dt_eval_idx = pd.bdate_range(end=ds_data.index[-1],

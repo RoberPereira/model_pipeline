@@ -18,15 +18,6 @@
                     "params":{}
                 },                
                 {
-                    "method": "compute_target",
-                    "params":{
-                        "on_column": "open",
-                        "prefix": "t_",
-                        "postfix": "d",
-                        "forecast_day": [1, 5, 10, 23]
-                    }
-                },
-                {
                     "method": "load",
                     "params":{ "path_name": null }
                 }                  
@@ -37,34 +28,56 @@
             "version": "01",
             "steps":[
                 {
-                    "method": "load_data",
-                    "params": { "etl_version": "01" }
-                },
+                    "method": "load_etl",
+                    "params":{
+                        "version": "01",
+                        "stock": "MELI",
+                        "startdate": "1990-01-01",
+                        "enddate": "2023-10-11"
+                    }
+                }, 
+                {
+                    "method": "compute_target",
+                    "params":{
+                        "on_column": "open",
+                        "prefix": "t_",
+                        "postfix": "d",
+                        "forecast_day": [1, 5, 10, 23]
+                    }
+                },                
                 {
                     "method": "compute_features",
                     "params":{
                         "on_columns": ["open", "high", "low", "close", "adj close", "volume" ],
                         "day_windows": [1, 5, 10, 23]
                     }
-                },
+                },                
                 {
-                    "method": "get_model",
+                    "method": "data_split",
                     "params":{
-                        "model":{
-                            "type": "xgb",
-                            "params":{},
-                            "identifier": "meli_one"
-                        }
+                        "strategy": null,
+                        "forecast_day": 23
+                    }
+                },                
+                {
+                    "method": "build_model",
+                    "params":{
+                        "model":{ "type": "xgb", "params":{}}
                     }
                 },
                 {
                     "method": "train",
                     "params": {
                         "hyperparameter_tuning": true,
-                        "train_test": true,
-                        "forecast_day": 23
+                        "train_test": true
                     }
-                }
+                },
+                {
+                    "method": "save_model",
+                    "params": {
+                        "identifier": "meli_one"
+                    }
+                }                
             ]
         }
     ]

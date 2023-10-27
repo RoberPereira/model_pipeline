@@ -1,9 +1,10 @@
-from components._pipecomponents import (Etl)
+from components._pipecomponents import (Etl, Train)
 
 import os
 
 __all__ = [
-    'Etl'
+    'Etl',
+    'Train'
 ]
 
 current_dir = os.path.dirname(os.path.abspath('__file__'))
