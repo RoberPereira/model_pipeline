@@ -1,4 +1,4 @@
-from components._pipecomponents import (Etl, Train)
+from components._pipeline import (Etl, Train)
 
 import os
 

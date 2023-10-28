@@ -7,7 +7,7 @@ class TargetDefiner():
         self.config = config
 
     def compute_target(self, ds: pd.DataFrame):
-        targets_forecast_days = self.config.get('forecast_day')
+        targets_forecast_days = self.config.get('forecast_days')
         target_prefix = self.config.get('prefix')
         target_postfix = self.config.get('postfix')
         target_on_column = self.config.get('on_column')
@@ -23,6 +23,6 @@ class TargetDefiner():
     def get_target_columns(self):
         prefix = self.config.get('prefix')
         postfix = self.config.get('postfix')
-        targets_forecast_days = self.config.get('forecast_day')
+        targets_forecast_days = self.config.get('forecast_days')
 
         return [f'{prefix}{t}{postfix}' for t in targets_forecast_days]

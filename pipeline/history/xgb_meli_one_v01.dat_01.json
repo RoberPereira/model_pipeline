@@ -1,0 +1,227 @@
+{
+    "extract": {
+        "status": "succes",
+        "input_params": {
+            "stock": "MELI",
+            "startdate": "1990-01-01",
+            "enddate": "2023-10-11"
+        },
+        "output": {
+            "output_raw": "raw/MELI_1990-01-01_2023-10-11"
+        }
+    },
+    "transform": {
+        "status": "succes",
+        "input_params": "01",
+        "output": {}
+    },
+    "load": {
+        "status": "succes",
+        "input_params": {
+            "path_name": null
+        },
+        "output": {
+            "output_processed": "processed/MELI_1990-01-01_2023-10-11"
+        }
+    },
+    "load_etl": {
+        "status": "succes",
+        "input_params": {
+            "version": "01",
+            "stock": "MELI",
+            "startdate": "1990-01-01",
+            "enddate": "2023-10-11"
+        },
+        "output": {
+            "path_name": "processed/MELI_1990-01-01_2023-10-11_v01"
+        }
+    },
+    "compute_target": {
+        "status": "succes",
+        "input_params": {
+            "on_column": "open",
+            "prefix": "t_",
+            "postfix": "d",
+            "forecast_days": [
+                1,
+                5,
+                10,
+                23
+            ]
+        },
+        "output": {
+            "target_columns": [
+                "t_1d",
+                "t_5d",
+                "t_10d",
+                "t_23d"
+            ]
+        }
+    },
+    "compute_features": {
+        "status": "succes",
+        "input_params": {
+            "on_columns": [
+                "open",
+                "high",
+                "low",
+                "close",
+                "adj close",
+                "volume"
+            ],
+            "day_windows": [
+                1,
+                5,
+                10,
+                23
+            ]
+        },
+        "output": {}
+    },
+    "data_split": {
+        "status": "succes",
+        "input_params": {
+            "strategy": null,
+            "forecast_day": 23
+        },
+        "output": {}
+    },
+    "build_model": {
+        "status": "succes",
+        "input_params": {
+            "model": {
+                "type": "xgb",
+                "params": {}
+            }
+        },
+        "output": {}
+    },
+    "train": {
+        "status": "succes",
+        "input_params": {
+            "hyperparameter_tuning": true,
+            "train_test": true
+        },
+        "output": {
+            "model_metrics": {
+                "null": {
+                    "MAE": 29.3,
+                    "MAPE": 0.24,
+                    "MSE": 2023.43,
+                    "RMSE": 44.98,
+                    "R^2": 0.99
+                }
+            }
+        }
+    },
+    "save_model": {
+        "status": "succes",
+        "input_params": {
+            "identifier": "meli_one"
+        },
+        "output": {
+            "model_name": "xgb_meli_one_v01.dat"
+        },
+        "model_features": [
+            "open_1d",
+            "open_diff_1d",
+            "open_mean_1d",
+            "open_std_1d",
+            "open_5d",
+            "open_diff_5d",
+            "open_mean_5d",
+            "open_std_5d",
+            "open_10d",
+            "open_diff_10d",
+            "open_mean_10d",
+            "open_std_10d",
+            "open_23d",
+            "open_diff_23d",
+            "open_mean_23d",
+            "open_std_23d",
+            "high_1d",
+            "high_diff_1d",
+            "high_mean_1d",
+            "high_std_1d",
+            "high_5d",
+            "high_diff_5d",
+            "high_mean_5d",
+            "high_std_5d",
+            "high_10d",
+            "high_diff_10d",
+            "high_mean_10d",
+            "high_std_10d",
+            "high_23d",
+            "high_diff_23d",
+            "high_mean_23d",
+            "high_std_23d",
+            "low_1d",
+            "low_diff_1d",
+            "low_mean_1d",
+            "low_std_1d",
+            "low_5d",
+            "low_diff_5d",
+            "low_mean_5d",
+            "low_std_5d",
+            "low_10d",
+            "low_diff_10d",
+            "low_mean_10d",
+            "low_std_10d",
+            "low_23d",
+            "low_diff_23d",
+            "low_mean_23d",
+            "low_std_23d",
+            "close_1d",
+            "close_diff_1d",
+            "close_mean_1d",
+            "close_std_1d",
+            "close_5d",
+            "close_diff_5d",
+            "close_mean_5d",
+            "close_std_5d",
+            "close_10d",
+            "close_diff_10d",
+            "close_mean_10d",
+            "close_std_10d",
+            "close_23d",
+            "close_diff_23d",
+            "close_mean_23d",
+            "close_std_23d",
+            "adj close_1d",
+            "adj close_diff_1d",
+            "adj close_mean_1d",
+            "adj close_std_1d",
+            "adj close_5d",
+            "adj close_diff_5d",
+            "adj close_mean_5d",
+            "adj close_std_5d",
+            "adj close_10d",
+            "adj close_diff_10d",
+            "adj close_mean_10d",
+            "adj close_std_10d",
+            "adj close_23d",
+            "adj close_diff_23d",
+            "adj close_mean_23d",
+            "adj close_std_23d",
+            "volume_1d",
+            "volume_diff_1d",
+            "volume_mean_1d",
+            "volume_std_1d",
+            "volume_5d",
+            "volume_diff_5d",
+            "volume_mean_5d",
+            "volume_std_5d",
+            "volume_10d",
+            "volume_diff_10d",
+            "volume_mean_10d",
+            "volume_std_10d",
+            "volume_23d",
+            "volume_diff_23d",
+            "volume_mean_23d",
+            "volume_std_23d",
+            "day_of_week",
+            "day_of_year",
+            "month"
+        ]
+    }
+}

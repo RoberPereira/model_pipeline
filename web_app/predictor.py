@@ -1,5 +1,5 @@
-from src.services.loaderclass import StockLoader
-from src.utils.model_functions import interpolate_prediction_days
+from src.services.loaderclass import StockLoader ## need to acces the pipeline throw and abstraction class
+from pipeline.src.model_functions import interpolate_prediction_days
 
 import pickle
 import io
