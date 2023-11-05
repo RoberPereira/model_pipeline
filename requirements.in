@@ -1,20 +1,20 @@
 # server dependencies
-Flask
+Flask==3.0.0
 
 # ml dependecies
-ipykernel
-pandas
-numpy
-seaborn
-scikit-learn
-xgboost
+ipykernel==6.25.2
+pandas==2.1.1
+numpy==1.26.1
+seaborn==0.13.0
+scikit-learn==1.3.1
+xgboost==2.0.0
 
 # data dependencies
-joblib
-pickles
+joblib==1.3.2
+pickles==0.1.1
 
-yfinance
-pandas-datareader
+yfinancev
+pandas-datareader==0.10.0
 
 
 
