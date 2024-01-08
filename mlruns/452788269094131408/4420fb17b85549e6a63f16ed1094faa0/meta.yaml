@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/452788269094131408/4420fb17b85549e6a63f16ed1094faa0/artifacts
+end_time: 1699400176102
+entry_point_name: ''
+experiment_id: '452788269094131408'
+lifecycle_stage: active
+run_id: 4420fb17b85549e6a63f16ed1094faa0
+run_name: nosy-snipe-699
+run_uuid: 4420fb17b85549e6a63f16ed1094faa0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1699400169982
+status: 3
+tags: []
+user_id: ropereira

@@ -1,0 +1,4 @@
+ColumnTransformer(transformers=[('selector', 'passthrough',
+                                 ['open', 'high', 'low', 'close', 'adj close',
+                                  'volume'])],
+                  verbose_feature_names_out=False)

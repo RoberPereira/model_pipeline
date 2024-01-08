@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1699401121594
+current_stage: Staging
+description: ''
+last_updated_timestamp: 1699401161866
+name: Test-Prod1
+run_id: 27980f5f297b48aaae2e859ff849a339
+run_link: ''
+source: mlflow-artifacts:/452788269094131408/27980f5f297b48aaae2e859ff849a339/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/452788269094131408/27980f5f297b48aaae2e859ff849a339/artifacts/model
+user_id: null
+version: 1

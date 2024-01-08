@@ -1,0 +1,11 @@
+digest: 855d4f73
+name: dataset
+profile: '{"num_rows": 4024, "num_elements": 40240}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "open"}, {"type": "double",
+  "name": "high"}, {"type": "double", "name": "low"}, {"type": "double", "name": "close"},
+  {"type": "double", "name": "adj close"}, {"type": "long", "name": "volume"}, {"type":
+  "double", "name": "t_1d"}, {"type": "double", "name": "t_5d"}, {"type": "double",
+  "name": "t_10d"}, {"type": "double", "name": "t_23d"}]}'
+source: '{"tags": {"mlflow.user": "ropereira", "mlflow.source.name": "run.py", "mlflow.source.type":
+  "LOCAL"}}'
+source_type: code

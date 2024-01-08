@@ -112,7 +112,7 @@ class ModelBuilder(PipelineMethod):
         logger.info(f'Building Model. {self.params}')
 
         model = xgb.XGBRegressor(
-            n_estimators=27,
+            n_estimators=15,
             max_depth=4,
             min_child_weight=1,
             eta=0.1,
