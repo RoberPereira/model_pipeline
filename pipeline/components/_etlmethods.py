@@ -1,5 +1,5 @@
 from ._pipemethods import (PipelineMethod, MethodResult)
-from src.services.loaderclass import StockLoader
+from pipeline.src.services.loaderclass import StockLoader
 import datetime as dt
 import logging
 

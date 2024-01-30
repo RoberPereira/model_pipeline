@@ -39,7 +39,7 @@
                 {
                     "method": "compute_target",
                     "params":{
-                        "on_column": "open",
+                        "on_column": "close",
                         "prefix": "t_",
                         "postfix": "d",
                         "forecast_days": [1, 5, 10, 23]

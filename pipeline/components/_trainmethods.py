@@ -1,8 +1,8 @@
 from ._pipemethods import (PipelineMethod, MethodResult)
-from src.services.targetdefinerclass import TargetDefiner
-from src.services.splitterclass import DataSplitterCustom
-from src.services.aggregatorclass import FeatureAggregator
-from src.model_functions import compute_evaluation_metrics
+from pipeline.src.services.targetdefinerclass import TargetDefiner
+from pipeline.src.services.splitterclass import DataSplitterCustom
+from pipeline.src.services.aggregatorclass import FeatureAggregator
+from pipeline.src.model_functions import compute_evaluation_metrics
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
@@ -36,7 +36,7 @@ class LoadEtl(PipelineMethod):
             e_date = self.params.get('enddate')
             path_name = f'processed/{self.params.get("stock")}_{s_date}_{e_date}_v{version}'
 
-        data = joblib.load(f'data/{path_name}')
+        data = joblib.load(f'pipeline/data/{path_name}')
 
         output = {'path_name': path_name}
         self.passthrough(self.params, output, 'succes', {'data': data})
@@ -194,7 +194,7 @@ class SaveModel(PipelineMethod):
         type = model_metadata.get('model').get('type')
         identifier = self.params.get('identifier')
         name = f'{type}_{identifier}_v{version}.dat'
-        pickle.dump(pipeline, open(f'models/{name}', "wb"))
+        pickle.dump(pipeline, open(f'pipeline/models/{name}', "wb"))
 
         output = {'model_name': name}
         datasets = self.previews_restult(last_results).get_datasets()

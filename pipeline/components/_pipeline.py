@@ -1,8 +1,8 @@
-from components._pipemethods import (PipelineMethod)
-from components._etlmethods import (Extract, Trasnform, Load)
-from components._trainmethods import (LoadEtl, ComputeFeatures, ComputeTarget,
-                                      DataSplitter, ModelBuilder, ModelTrainer,
-                                      SaveModel)
+from pipeline.components._pipemethods import (PipelineMethod)
+from pipeline.components._etlmethods import (Extract, Trasnform, Load)
+from pipeline.components._trainmethods import (LoadEtl, ComputeFeatures,
+                                               ComputeTarget, DataSplitter,
+                                               ModelBuilder, ModelTrainer, SaveModel)
 import json
 import logging
 
@@ -74,7 +74,7 @@ class Train(PipelineStep):
 class Pipeline:
 
     def __init__(self) -> None:
-        with open('config.json', 'r') as config_file:
+        with open('pipeline/config.json', 'r') as config_file:
             self.config = json.load(config_file)
         self.version = self.config.get('version')
 
@@ -108,5 +108,5 @@ class Pipeline:
                 model_features = result.get_pipeline()['aggregator'].agg_features_
                 history[method]['model_features'] = model_features
 
-        with open(f'history/{model_name}_{self.version}.json', "w") as file:
+        with open(f'pipeline/history/{model_name}_{self.version}.json', "w") as file:
             json.dump(history, file)

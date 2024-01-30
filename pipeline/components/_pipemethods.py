@@ -68,7 +68,7 @@ class PipelineMethod:
         pass
 
     def save_mresult_data(self, path_name, data_name='data'):
-        joblib.dump(self.mresult.get_dataset(data_name), f'data/{path_name}_v{self.version}')
+        joblib.dump(self.mresult.get_dataset(data_name), f'pipeline/data/{path_name}_v{self.version}')
 
     def passthrough(self, in_params, output, status,
                     datasets: {str: pd.DataFrame} = None,

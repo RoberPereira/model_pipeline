@@ -3,6 +3,12 @@
 
 Model Pipeline for Stock Forecast
 
+This is a mock project designed to automate a model training pipeline by configuring a file (/pipeline/config.json) that specifies all the steps, from fetching data to the training process, and saving it for later deployment.
+
+It also utilizes MLflow to track some experiments but is not configured by a config file; instead, it is configured only by code.
+
+The models created are intended to 'forecast' stock prices, even though there is a significant conceptual error as these series are not stationary. However, for the purpose of this project, it didn't matter.
+
 ## Installation
 
 Python version==3.11.5
@@ -30,32 +36,26 @@ pip install -r requirements.txt
 python run.py
 ```
 
+### Output
+
+In the 'pipeline/history' folder, you should find a JSON output containing all the details of the run. It includes the output of each step and the directory to the model output located in the '/pipeline/models' folder.
+
 ## Project Structure
 ```bash
 tree -d -I __pycache__
 ```
 ```
 .
-├── app
-│   ├── static
-│   │   ├── assets
-│   │   │   └── dist
-│   │   └── images
-│   └── templates
-├── pipeline
-│   ├── components
-│   ├── data
-│   │   ├── processed
-│   │   └── raw
-│   ├── history
-│   ├── models
-│   ├── notebooks
-│   │   └── utils
-│   ├── prediction
-│   └── src
-│       ├── services
-│       └── utils
-├── test
-└── web_app
-    └── templates
+├── components
+├── data
+│   ├── processed
+│   └── raw
+├── history
+├── models
+├── notebooks
+│   └── utils
+├── prediction
+└── src
+    ├── services
+    └── utils
 ```
