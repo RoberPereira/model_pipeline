@@ -9,6 +9,8 @@ It also utilizes MLflow to track some experiments but is not configured by a con
 
 The models created are intended to 'forecast' stock prices, even though there is a significant conceptual error as these series are not stationary. However, for the purpose of this project, it didn't matter.
 
+The Pipeline code (etl, train) is located in the /pipeline/components folder
+
 ## Installation
 
 Python version==3.11.5
@@ -16,6 +18,7 @@ Python version==3.11.5
 Start virtual enviroment. [venv] (https://docs.python.org/3/library/venv.html#venv-def)
 ```bash
 python -m venv .venv
+source .venv/bin/activate
 ```
 
 Use pip-tools package manager to install project dependencies. [pip-tools] (https://pip-tools.readthedocs.io/en/stable/)
@@ -38,7 +41,7 @@ python run.py
 
 ### Output
 
-In the 'pipeline/history' folder, you should find a JSON output containing all the details of the run. It includes the output of each step and the directory to the model output located in the '/pipeline/models' folder.
+In the 'pipeline/history' folder, you should find a JSON output containing all the details of the run. It includes input and output of each step and the directory to the model output located in the '/pipeline/models' folder.
 
 ## Project Structure
 ```bash
@@ -47,6 +50,9 @@ tree -d -I __pycache__
 ```
 .
 ├── components
+│   ├── etl.py
+│   └── train.py
+│   └── pipeline.py
 ├── data
 │   ├── processed
 │   └── raw
