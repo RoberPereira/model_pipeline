@@ -7,7 +7,7 @@ This is a mock project designed to automate a model training pipeline by configu
 
 It also utilizes MLflow to track some experiments but is not configured by a config file; instead, it is configured only by code.
 
-The models created are intended to 'forecast' stock prices, even though there is a significant conceptual error as these series are not stationary. However, for the purpose of this project, it didn't matter.
+The models created are intended to 'forecast' stock prices, even though is not the correct approach for non stationary serires and with high external randomness. However, for the purpose of this project, it didn't matter.
 
 The Pipeline code (etl, train) is located in the /pipeline/components folder
 
@@ -15,13 +15,13 @@ The Pipeline code (etl, train) is located in the /pipeline/components folder
 
 Python version==3.11.5
 
-Start virtual enviroment. [venv] (https://docs.python.org/3/library/venv.html#venv-def)
+Start virtual enviroment. [venv](https://docs.python.org/3/library/venv.html#venv-def)
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-Use pip-tools package manager to install project dependencies. [pip-tools] (https://pip-tools.readthedocs.io/en/stable/)
+Use pip-tools package manager to install project dependencies. [pip-tools](https://pip-tools.readthedocs.io/en/stable/)
 ```bash
 python -m pip install pip-tools
 ```
